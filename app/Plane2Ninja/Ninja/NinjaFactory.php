@@ -45,7 +45,7 @@ class NinjaFactory
         foreach($clients as $client) {
 
             $ninjaArray[] = $this->clientTransformer->transform($client);
-            $ninjaArray[]['invoices'] = $this->buildInvoices($client->invoices()->get());
+            //$ninjaArray[]['invoices'] = $this->buildInvoices($client->invoices()->get());
 
             $x++;
         }
@@ -63,7 +63,7 @@ class NinjaFactory
         return $productObjects;
     }
 
-    private function buildInvoices($invoices)
+    public function buildInvoices($invoices)
     {
         $invoiceObjects = [];
         $x = 0;
