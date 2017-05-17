@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "turbo124/Plane2Ninja",
+    "description": "Data conversion tool for users moving from Invoice Plane to Invoice Ninja",
+    "keywords": ["invoice", "laravel", "invoicing"],
     "license": "MIT",
     "type": "project",
     "require": {
