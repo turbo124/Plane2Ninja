@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,5 +13,11 @@ class Client extends Model
      */
     protected $table = 'ip_clients';
 
+    public function invoices() {
+        return $this->hasMany('App\Models\Invoice', 'client_id', 'client_id');
+    }
 
+    public function notes() {
+        return $this->hasMany('App\Models\ClientNote', 'client_id', 'client_id');
+    }
 }

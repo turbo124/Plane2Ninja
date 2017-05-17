@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,7 +23,7 @@ class Invoice extends Model
         return $this->hasOne('App\Models\InvoiceAmount','invoice_id', 'invoice_id');
     }
 
-    public function tax_rates()
+    public function tax_rate()
     {
         return $this->hasMany('App\Models\InvoiceTaxRate','invoice_id','invoice_id');
     }

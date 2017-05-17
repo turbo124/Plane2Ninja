@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,5 +16,10 @@ class InvoiceItem extends Model
     public function amount()
     {
         return $this->hasOne('App\Models\InvoiceItemAmount','item_id', 'item_id');
+    }
+
+    public function tax_rate()
+    {
+        return $this->hasOne('App\Models\TaxRate','item_tax_rate_id','tax_rate_id');
     }
 }

@@ -19,19 +19,9 @@
 
     $('.btn').click('click', function() {
 
-        $.ajax({
-            'url' : '/crunch',
-            'type' : 'GET',
-            'data' : {
-                'class' : this.id
-            },
-            'success' : function(data) {
 
-                alert(data);
+        window.location.href = '/crunch/' + this.id;
 
-            }
-        });
-        return false;
 
     });
 

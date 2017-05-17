@@ -12,4 +12,4 @@
 */
 
 Route::get('/', 'ImportController@index');
-Route::get('/crunch', 'ImportController@crunch');
+Route::get('/crunch/{class_name}', 'ImportController@crunch');

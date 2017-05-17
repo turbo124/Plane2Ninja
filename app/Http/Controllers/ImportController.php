@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
 
 class ImportController extends BaseController
 {
@@ -27,11 +27,11 @@ class ImportController extends BaseController
 
     }
 
-    public function crunch() {
+    public function crunch($className) {
 
-        $class = Input::get('class');
+        $clients = Client::with('invoices')->get();
 
-        echo $class;
+        echo json_encode($clients, JSON_PRETTY_PRINT);
     }
 
 }

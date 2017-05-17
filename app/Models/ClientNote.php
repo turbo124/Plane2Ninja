@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class QuoteItem extends Model
+class ClientNote extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'ip_quote_items';
+    protected $table = 'ip_client_note';
 
-    
 }
