@@ -41,9 +41,9 @@ class BaseTransformer
      *
      * @return float
      */
-    public function getFloat($data, $field)
+    public function getFloat($data)
     {
-        return (isset($data->$field) && $data->$field) ? $this->parseFloat($data->$field) : 0;
+        return (isset($data)) ? $this->parseFloat($data) : 0;
     }
 
 
@@ -57,6 +57,8 @@ class BaseTransformer
      */
     public function getDate($datefield)
     {
+        $date = null;
+
         if ($datefield) {
             try {
                 $date = new Carbon($datefield);

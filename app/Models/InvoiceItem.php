@@ -20,6 +20,6 @@ class InvoiceItem extends Model
 
     public function tax_rate()
     {
-        return $this->hasOne('App\Models\TaxRate','item_tax_rate_id','tax_rate_id');
+        return $this->hasOne('App\Models\TaxRate','tax_rate_id', 'item_tax_rate_id');
     }
 }

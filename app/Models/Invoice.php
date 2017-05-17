@@ -23,9 +23,19 @@ class Invoice extends Model
         return $this->hasOne('App\Models\InvoiceAmount','invoice_id', 'invoice_id');
     }
 
-    public function tax_rate()
+    public function tax_rates()
     {
         return $this->hasMany('App\Models\InvoiceTaxRate','invoice_id','invoice_id');
+    }
+
+    public function payments()
+    {
+        return $this->hasMany('App\Models\Payment', 'invoice_id', 'invoice_id');
+    }
+
+    public function client()
+    {
+        return $this->hasOne('App\Models\Client', 'client_id', 'client_id');
     }
 
 }

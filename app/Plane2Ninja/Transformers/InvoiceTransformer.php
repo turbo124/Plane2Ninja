@@ -20,7 +20,7 @@ class InvoiceTransformer extends BaseTransformer
         return [
             'client_id' => $invoice->client_id,
             'invoice_number' => $invoice->invoice_number ? $this->getInvoiceNumber($invoice->invoice_number) : null,
-            'paid' => $invoice->amount()->invoice_paid,
+            'paid' => $invoice->amount()->first()->invoice_paid,
             'po_number' => '',
             'terms' => $this->getString($invoice->invoice_terms),
             'public_notes' => '',
@@ -39,10 +39,10 @@ class InvoiceTransformer extends BaseTransformer
 
     private function getTaxRate($invoice, $index) {
 
-        $taxRate = $invoice->tax_rates()->get($index--);
+        $taxRate = $invoice->tax_rates()->get()->toArray();
 
-        if(isset($taxRate))
-            return $taxRate->tax_rate_percent;
+        if(isset($taxRate[$index-1]))
+            return $taxRate[$index-1]->tax_rate_percent;
         else
             return 0;
 
@@ -50,10 +50,10 @@ class InvoiceTransformer extends BaseTransformer
 
     private function getTaxName($invoice, $index){
 
-        $taxName = $invoice->tax_rates()->get($index--);
+        $taxName = $invoice->tax_rates()->get()->toArray();
 
-        if(isset($taxName))
-            return $taxName->tax_rate_name;
+        if(isset($taxName[$index-1]))
+            return $taxName[$index-1]->tax_rate_name;
         else
             return null;
 

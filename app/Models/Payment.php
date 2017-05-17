@@ -13,5 +13,9 @@ class Payment extends Model
      */
     protected $table = 'ip_payments';
 
-    
+    public function invoice()
+    {
+        return $this->belongsTo('App\Models\Invoice', 'invoice_id', 'invoice_id');
+    }
+
 }
