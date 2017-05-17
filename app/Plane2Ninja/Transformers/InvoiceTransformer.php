@@ -55,7 +55,7 @@ class InvoiceTransformer extends BaseTransformer
         if(isset($taxName[$index-1]))
             return $taxName[$index-1]->tax_rate_name;
         else
-            return null;
+            return '';
 
     }
 

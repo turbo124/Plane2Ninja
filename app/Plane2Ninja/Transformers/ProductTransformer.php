@@ -34,7 +34,7 @@ class ProductTransformer extends BaseTransformer
         if(isset( $item->tax_rate()->tax_rate_name) )
             return $item->tax_rate()->tax_rate_name;
         else
-            return null;
+            return '';
 
     }
 }

@@ -54,7 +54,7 @@ class QuoteTransformer extends BaseTransformer
         if(isset($taxName))
             return $taxName->tax_rate_name;
         else
-            return null;
+            return '';
 
     }
 

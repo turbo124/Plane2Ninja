@@ -50,7 +50,7 @@ class InvoiceItemTransformer extends BaseTransformer
         if(isset($taxName->tax_rate_name))
             return $taxName->tax_rate_name;
         else
-            return null;
+            return '';
 
     }
 }

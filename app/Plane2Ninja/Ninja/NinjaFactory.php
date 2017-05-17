@@ -84,6 +84,9 @@ class NinjaFactory
                 $j++;
             }
 
+            if(count($invoice->payments()->get()) == 0)
+                $invoiceObjects[$x]['payments'][0] = [];
+
             $x++;
         }
 
