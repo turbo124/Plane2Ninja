@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class InvoiceTaxRate extends Model
+class QuoteTaxRate extends Model
 {
     /**
      * The table associated with the model.
