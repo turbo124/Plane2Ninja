@@ -39,4 +39,3 @@ class QuoteItemTransformer extends BaseTransformer
             return '';
     }
 }
-Raw

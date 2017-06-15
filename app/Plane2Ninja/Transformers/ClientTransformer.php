@@ -6,7 +6,7 @@ class ClientTransformer extends BaseTransformer
 {
     public function transform(Client $client)
     {
-        $ninjaFactory = new NinjaFactory(new ClientTransformer(), new InvoiceTransformer(), new PaymentTransformer(), new InvoiceItemTransformer(), new ProductTransformer(), new QuoteTransformer());
+        $ninjaFactory = new NinjaFactory(new ClientTransformer(), new InvoiceTransformer(), new PaymentTransformer(), new InvoiceItemTransformer(), new ProductTransformer(), new QuoteTransformer(), new QuoteItemTransformer());
         return [
             'id' => $client->client_id,
             'name' => $client->client_ame,

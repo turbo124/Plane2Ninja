@@ -3,6 +3,7 @@
 namespace App\Plane2Ninja\Transformers;
 
 use App\Models\Invoice;
+use App\Models\TaxRate;
 
 /**
  * Class InvoiceTransformer
@@ -41,8 +42,10 @@ class InvoiceTransformer extends BaseTransformer
 
         $taxRate = $invoice->tax_rates()->get()->toArray();
 
-        if(isset($taxRate[$index-1]))
-            return $taxRate[$index-1]->tax_rate_percent;
+        if(isset($taxRate[$index-1]['tax_rate_id'])) {
+            $tax_rate = TaxRate::where(['tax_rate_id'=>$taxRate[$index-1]['tax_rate_id']])->first();
+            return $tax_rate->tax_rate_percent;
+        }
         else
             return 0;
 
@@ -52,8 +55,10 @@ class InvoiceTransformer extends BaseTransformer
 
         $taxName = $invoice->tax_rates()->get()->toArray();
 
-        if(isset($taxName[$index-1]))
-            return $taxName[$index-1]->tax_rate_name;
+        if(isset($taxName[$index-1]['tax_rate_id'])) {
+            $tax_rate = TaxRate::where(['tax_rate_id'=>$taxName[$index-1]['tax_rate_id']])->first();
+            return $tax_rate->tax_rate_name;
+        }
         else
             return '';
 

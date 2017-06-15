@@ -10,6 +10,8 @@ use App\Plane2Ninja\Transformers\InvoiceItemTransformer;
 use App\Plane2Ninja\Transformers\InvoiceTransformer;
 use App\Plane2Ninja\Transformers\PaymentTransformer;
 use App\Plane2Ninja\Transformers\ProductTransformer;
+use App\Plane2Ninja\Transformers\QuoteTransformer;
+use App\Plane2Ninja\Transformers\QuoteItemTransformer;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +41,7 @@ class ImportController extends BaseController
 
         $clients = Client::with('invoices', 'invoices.items', 'invoices.payments')->get();
 
-        $ninjaFactory = new NinjaFactory(new ClientTransformer(), new InvoiceTransformer(), new PaymentTransformer(), new InvoiceItemTransformer(), new ProductTransformer());
+        $ninjaFactory = new NinjaFactory(new ClientTransformer(), new InvoiceTransformer(), new PaymentTransformer(), new InvoiceItemTransformer(), new ProductTransformer(), new QuoteTransformer(), new QuoteItemTransformer());
 
         $data['clients'] = $ninjaFactory->buildNinja($clients);
         $data['products'] = $ninjaFactory->buildProducts(Product::all());
