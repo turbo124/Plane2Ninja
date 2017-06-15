@@ -1,18 +1,12 @@
 <?php
-
 namespace App\Plane2Ninja\Transformers;
-
 use App\Models\Client;
 use App\Plane2Ninja\Ninja\NinjaFactory;
-
 class ClientTransformer extends BaseTransformer
 {
-
     public function transform(Client $client)
     {
-        $ninjaFactory = new NinjaFactory(new ClientTransformer(), new InvoiceTransformer(), new PaymentTransformer(), new InvoiceItemTransformer(), new ProductTransformer());
-
-
+        $ninjaFactory = new NinjaFactory(new ClientTransformer(), new InvoiceTransformer(), new PaymentTransformer(), new InvoiceItemTransformer(), new ProductTransformer(), new QuoteTransformer());
         return [
             'id' => $client->client_id,
             'name' => $client->client_ame,
@@ -48,8 +42,7 @@ class ClientTransformer extends BaseTransformer
                     'phone' => $this->getContactPhone($client),
                 ],
             ],
-            'invoices' => $ninjaFactory->buildInvoices($client->invoices()->get())
+            'invoices' => array_merge($ninjaFactory->buildInvoices($client->invoices()->get()), $ninjaFactory->buildQuotes($client->quotes()->get()))
         ];
     }
-
 }

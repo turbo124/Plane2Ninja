@@ -8,6 +8,8 @@ use App\Plane2Ninja\Transformers\InvoiceItemTransformer;
 use App\Plane2Ninja\Transformers\InvoiceTransformer;
 use App\Plane2Ninja\Transformers\PaymentTransformer;
 use App\Plane2Ninja\Transformers\ProductTransformer;
+use App\Plane2Ninja\Transformers\QuoteItemTransformer;
+use App\Plane2Ninja\Transformers\QuoteTransformer;
 use Illuminate\Support\Collection;
 
 class NinjaFactory
@@ -28,13 +30,19 @@ class NinjaFactory
 
     protected $productTransformer;
 
-    public function __construct(ClientTransformer $clientTransformer, InvoiceTransformer $invoiceTransformer, PaymentTransformer $paymentTransformer, InvoiceItemTransformer $invoiceItemTransformer, ProductTransformer $productTransformer)
+    protected $quoteTransformer;
+
+    protected $quoteItemTransformer;
+
+    public function __construct(ClientTransformer $clientTransformer, InvoiceTransformer $invoiceTransformer, PaymentTransformer $paymentTransformer, InvoiceItemTransformer $invoiceItemTransformer, ProductTransformer $productTransformer, QuoteTransformer $quoteTransformer, QuoteItemTransformer $quoteItemTransformer)
     {
         $this->clientTransformer = $clientTransformer;
         $this->invoiceTransformer = $invoiceTransformer;
         $this->paymentTransformer = $paymentTransformer;
         $this->invoiceItemTransformer = $invoiceItemTransformer;
         $this->productTransformer = $productTransformer;
+        $this->quoteTransformer = $quoteTransformer;
+        $this->quoteItemTransformer = $quoteItemTransformer;
     }
 
     public function buildNinja(Collection $clients)
@@ -91,6 +99,28 @@ class NinjaFactory
         }
 
         return $invoiceObjects;
+    }
+
+    public function buildQuotes($quotes)
+    {
+        $quoteObjects = [];
+        $x = 0;
+
+        foreach ($quotes as $quote)
+        {
+        $quoteObjects[$x] = $this->quoteTransformer->transform($quote);
+
+            $i = 0;
+            foreach($quote->items()->get() as $item) {
+                $quoteObjects[$x]['invoice_items'][$i] = $this->quoteItemTransformer->transform($item);
+                $i++;
+            }
+
+            $x++;
+
+        }
+
+        return $quoteObjects;
     }
 
 

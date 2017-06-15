@@ -1,16 +1,12 @@
 <?php
-
 namespace App\Plane2Ninja\Transformers;
-
 use App\Models\Quote;
-
 /**
  * Class InvoiceTransformer
  * @package App\Plane2Ninja\Transformers
  */
 class QuoteTransformer extends BaseTransformer
 {
-
     /**
      * @param Invoice $invoice
      * @return array
@@ -28,72 +24,57 @@ class QuoteTransformer extends BaseTransformer
             'invoice_status_id' => $this->transformQuoteStatus($quote->quote_status_id),
             'is_amount_discount' => $this->checkDiscountAmount($quote),
             'discount' => $this->fillDiscount($quote),
-            'tax_name1' => $this->getTaxName($quote,1),
-            'tax_rate1' => $this->getTaxRate($quote,1),
-            'tax_name2' => $this->getTaxName($quote,2),
-            'tax_rate2' => $this->getTaxRate($quote,2),
+            'invoice_type_id' => 4,
+            'is_quote'=> true
         ];
     }
-
-
-    private function getTaxRate($quote, $index) {
-
-        $taxRate = $quote->tax_rates()->get($index--);
-
-        if(isset($taxRate))
-            return $taxRate->tax_rate_percent;
-        else
-            return 0;
-
+    private function getTaxRate($invoice, $index) {
+        $taxRate = $invoice->tax_rates()->get()->toArray();
+        if(isset($taxRate[$index-1])){
+            $v = $taxRate[$index-1];
+            return array_key_exists('tax_rate_percent',$v)? $v['tax_rate_percent'] : '';
+        }
+        else{
+            return 0;}
     }
-
-    private function getTaxName($quote, $index){
-
-        $taxName = $quote->tax_rates()->get($index--);
-
-        if(isset($taxName))
-            return $taxName->tax_rate_name;
-        else
-            return '';
-
+    private function getTaxName($invoice, $index){
+        $taxName = $invoice->tax_rates()->get()->toArray();
+        if(isset($taxName[$index-1])){
+            $v = $taxName[$index-1];
+            return array_key_exists('tax_rate_name',$v)? $v['tax_rate_name'] : '';
+        }
+        else{
+            return '';}
     }
-
     /**
      * @param Invoice $invoice
      * @return bool|null
      */
     private function checkDiscountAmount(Quote $quote){
-
         if($quote->quote_discount_amount > 0)
             return true;
         elseif($quote->quote_discount_percent > 0)
             return false;
         else
             return null;
-
     }
-
     /**
      * @param Invoice $invoice
      * @return int|mixed
      */
     private function fillDiscount(Quote $quote){
-
         if($quote->quote_discount_amount > 0)
             return $quote->quote_discount_amount;
         elseif($quote->quote_discount_percent > 0)
             return $quote->quote_discount_percent;
         else
             return 0;
-
     }
-
     /**
      * @param $invoiceStatus
      * @return int
      */
     private function transformInvoiceStatus($invoiceStatus) {
-
         switch($invoiceStatus)
         {
             case 1:
@@ -108,9 +89,7 @@ class QuoteTransformer extends BaseTransformer
                 return 1;
         }
     }
-
     private function transformQuoteStatus($quoteStatus) {
-
         switch($quoteStatus)
         {
             case 1:
@@ -129,5 +108,4 @@ class QuoteTransformer extends BaseTransformer
                 return 1;
         }
     }
-
 }
