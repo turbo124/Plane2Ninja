@@ -25,7 +25,8 @@ class QuoteTransformer extends BaseTransformer
             'is_amount_discount' => $this->checkDiscountAmount($quote),
             'discount' => $this->fillDiscount($quote),
             'invoice_type_id' => 4,
-            'is_quote'=> true
+            'is_quote'=> true,
+            'invoice_design_id' =>1,
         ];
     }
     private function getTaxRate($invoice, $index) {
