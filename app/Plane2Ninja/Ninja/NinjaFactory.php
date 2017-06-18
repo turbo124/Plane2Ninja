@@ -112,12 +112,12 @@ class NinjaFactory
 
             $i = 0;
             foreach($quote->items()->get() as $item) {
-               // $quoteObjects[$x]['invoice_items'][$i] = $this->quoteItemTransformer->transform($item);
+                $quoteObjects[$x]['invoice_items'][$i] = $this->quoteItemTransformer->transform($item);
                 $i++;
             }
 
-                $quoteObjects[$x]['payments'][0] = [];
-            
+                $quoteObjects[$x]['payments'] = [];
+
             $x++;
 
         }
