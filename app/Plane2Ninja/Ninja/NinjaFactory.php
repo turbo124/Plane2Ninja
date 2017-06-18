@@ -116,8 +116,8 @@ class NinjaFactory
                 $i++;
             }
 
-            $quoteObjects[$x]['payments'] = [];
-
+                $quoteObjects[$x]['payments'][0] = [];
+            
             $x++;
 
         }
