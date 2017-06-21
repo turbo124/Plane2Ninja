@@ -35,6 +35,7 @@ class InvoiceTransformer extends BaseTransformer
             'tax_name2' => $this->getTaxName($invoice,2),
             'tax_rate2' => $this->getTaxRate($invoice,2),
             'invoice_design_id' =>1,
+            'is_public'=>1,
         ];
     }
 

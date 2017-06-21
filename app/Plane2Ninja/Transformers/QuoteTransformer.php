@@ -27,6 +27,7 @@ class QuoteTransformer extends BaseTransformer
             'invoice_type_id' => 4,
             'is_quote'=> true,
             'invoice_design_id' =>1,
+            'is_public'=>1,
         ];
     }
     private function getTaxRate($invoice, $index) {
