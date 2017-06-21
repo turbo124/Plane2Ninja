@@ -101,8 +101,7 @@ class InvoiceTransformer extends BaseTransformer
      */
     private function transformInvoiceStatus($invoiceStatus) {
 
-        return 2;
-        
+
         switch($invoiceStatus)
         {
             case 1:
