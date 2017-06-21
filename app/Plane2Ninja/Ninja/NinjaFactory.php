@@ -3,6 +3,8 @@
 namespace App\Plane2Ninja\Ninja;
 
 use App\Models\Client;
+use App\Models\Invoice;
+use App\Models\InvoiceItem;
 use App\Plane2Ninja\Transformers\ClientTransformer;
 use App\Plane2Ninja\Transformers\InvoiceItemTransformer;
 use App\Plane2Ninja\Transformers\InvoiceTransformer;
@@ -86,6 +88,17 @@ class NinjaFactory
                 $i++;
             }
 
+            if(count($invoice->items()->get()) == 0) {
+
+                $item = new InvoiceItem();
+                $item->item_quantity = 1;
+                $item->item_price = $invoice->amount()->get()->first()->invoice_total;
+                $item->item_description = "Generic Line Item";
+                $item->item_name = "Generic Key";
+
+                $invoiceObjects[$x]['invoice_items'][0] = $this->invoiceItemTransformer->transform($item);
+            }
+
             $j = 0;
             foreach($invoice->payments()->get() as $payment) {
                 $invoiceObjects[$x]['payments'][$j] = $this->paymentTransformer->transform($payment);
@@ -114,6 +127,17 @@ class NinjaFactory
             foreach($quote->items()->get() as $item) {
                 $quoteObjects[$x]['invoice_items'][$i] = $this->quoteItemTransformer->transform($item);
                 $i++;
+            }
+
+            if(count($quote->items()->get()) == 0) {
+
+                $item = new InvoiceItem();
+                $item->item_quantity = 1;
+                $item->item_price = $quote->amount()->get()->first()->invoice_total;
+                $item->item_description = "Generic Line Item";
+                $item->item_name = "Generic Key";
+
+                $quoteObjects[$x]['invoice_items'][0] = $this->quoteItemTransformer->transform($item);
             }
 
                 $quoteObjects[$x]['payments'] = [];

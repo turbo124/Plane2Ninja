@@ -21,7 +21,7 @@ class InvoiceTransformer extends BaseTransformer
         return [
             'client_id' => $invoice->client_id,
             'invoice_number' => $invoice->invoice_number ? $this->getInvoiceNumber($invoice->invoice_number) : null,
-            'paid' => $invoice->amount()->first()->invoice_paid,
+            'amount' => $invoice->amount()->get()->first()->invoice_total,
             'po_number' => '',
             'terms' => $this->getString($invoice->invoice_terms),
             'public_notes' => '',
@@ -101,6 +101,8 @@ class InvoiceTransformer extends BaseTransformer
      */
     private function transformInvoiceStatus($invoiceStatus) {
 
+        return 2;
+        
         switch($invoiceStatus)
         {
             case 1:
