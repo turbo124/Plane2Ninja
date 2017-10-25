@@ -18,4 +18,9 @@ class Payment extends Model
         return $this->belongsTo('App\Models\Invoice', 'invoice_id', 'invoice_id');
     }
 
+    public function method()
+    {
+        return $this->hasOne('App\Models\PaymentMethod', 'payment_method_id', 'payment_method_id');
+    }
+
 }
