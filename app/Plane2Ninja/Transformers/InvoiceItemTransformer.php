@@ -9,12 +9,7 @@ class InvoiceItemTransformer extends BaseTransformer
 
     /*
      *
-     * Invoice plane has the ability to implement discounts on line items,
-     * this is an issue as this data cannot be translated across to Invoice Ninja
-     *
-     * The solution is to carry over the line item discounts into the invoice discount field.
-     * This will need to be calculated.
-     *
+     * Line item discounts now implemented
      *
     */
 
@@ -29,6 +24,7 @@ class InvoiceItemTransformer extends BaseTransformer
                 'tax_name1' => $this->getTaxName($item),
                 'tax_rate1' => $this->getTaxRate($item),
                 'invoice_item_type_id' => 1,
+                'discount' => $item->item_discount_amount ? $item->item_discount_amount : 0,
             ];
     }
 
