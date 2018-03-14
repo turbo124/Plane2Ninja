@@ -5,6 +5,7 @@ namespace App\Plane2Ninja\Ninja;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
+use App\Models\QuoteItem;
 use App\Plane2Ninja\Transformers\ClientTransformer;
 use App\Plane2Ninja\Transformers\InvoiceItemTransformer;
 use App\Plane2Ninja\Transformers\InvoiceTransformer;
@@ -131,7 +132,7 @@ class NinjaFactory
 
             if(count($quote->items()->get()) == 0) {
 
-                $item = new InvoiceItem();
+                $item = new QuoteItem();
                 $item->item_quantity = 1;
                 $item->item_price = $quote->amount()->get()->first()->invoice_total;
                 $item->item_description = "Generic Line Item";
