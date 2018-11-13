@@ -14,8 +14,11 @@ Please remember this is alpha quality, please test and create an issue if you fi
 ## Setup
 1. Download / Clone repo
 2. Composer install
-3. Configure .env file with your Invoice Plane database credentials
-4. Configure Virtual Host
-5. Navigate to Web URL
-6. Click Download Data!
-7. Import into Invoice Ninja
+3. cp .env.example .env
+4. Configure .env file with your Invoice Plane database credentials
+5. Generate artisan key (php artisan key:generate). This will fill the APP_KEY in the .env file.
+6. Clear the artisan cache (php artisan config:clear)
+7. Configure Virtual Host
+8. Navigate to Web URL
+9. Click Download Data!
+10. Import into Invoice Ninja
