@@ -21,6 +21,10 @@ class Client extends Model
         return $this->hasMany('App\Models\ClientNote', 'client_id', 'client_id');
     }
 
+    public function customfields() {
+        return $this->hasMany('App\Models\ClientCustomField', 'client_id', 'client_id');
+    }
+
     public function quotes() {
         return $this->hasMany('App\Models\Quote', 'client_id', 'client_id');
     }
