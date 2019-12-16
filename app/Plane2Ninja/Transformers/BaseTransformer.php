@@ -96,6 +96,15 @@ class BaseTransformer
         return $formattedString;
     }
 
+    public function formatCustomFields($customFields)
+    {
+        $formattedString = "";
+        foreach($customFields as $cfield)
+            $formattedString .= $cfield->client_custom_fieldvalue;
+
+        return $formattedString;
+    }
+
     public function getContactPhone(Client $client) {
 
         if(isset($client->client_phone))

@@ -30,8 +30,8 @@ class ClientTransformer extends BaseTransformer
             'id_number' => '',
             'language_id' => 0,
             'currency_id' => 0,
-            'custom_value1' => '',
-            'custom_value2' => '',
+            'custom_value1' => $this->formatCustomFields($client->customfields()->where('client_custom_fieldid', 1)->get()),
+            'custom_value2' => $this->formatCustomFields($client->customfields()->where('client_custom_fieldid', 2)->get()),
             'invoice_number_counter' => 1,
             'quote_number_counter' => 1,
             'contacts' => [
