@@ -19,7 +19,7 @@ class ClientTransformer extends BaseTransformer
             'postal_code' => $client->client_zip,
             'country_id' => '',
             'work_phone' => $this->getString($client->client_phone),
-            'private_notes' => $this->formatNotes($client->notes()),
+            'private_notes' => $this->formatNotes($client->notes()->get()),
             'last_login' => '',
             'website' => $this->getString($client->client_web),
             'industry_id' => 0,

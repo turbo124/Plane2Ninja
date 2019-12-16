@@ -11,6 +11,6 @@ class ClientNote extends Model
      *
      * @var string
      */
-    protected $table = 'ip_client_note';
+    protected $table = 'ip_client_notes';
 
 }
